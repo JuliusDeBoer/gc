@@ -58,9 +58,18 @@ services:
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         networks:
             - sail
+    ftp:
+        image: stilliard/pure-ftpd
+        volumes:
+          - "sail-pgsql:/home/ftpusers/"
+        environment:
+          FTP_USER_NAME: '${FTP_USERNAME}'
+          FTP_USER_PASS: '${FTP_PASSWORD}'
 networks:
     sail:
         driver: bridge
 volumes:
     sail-pgsql:
+        driver: local
+    ftp:
         driver: local
