@@ -16,5 +16,19 @@
                 <li>Groot Hagen 6, 7009 AM Doetinchem</li>
             </ul>
         </div>
+        <form>
+            @csrf
+            @method('PUT')
+
+            <label for="email">Email address</label>
+            <input id="email" type="email" />
+
+            <label for="content">Message</label>
+            <textarea id="content"
+                type=""
+                class="@error('email', 'login') is-invalid @enderror"></textarea>
+
+            <input type="submit" />
+        </form>
     </body>
 </html>
