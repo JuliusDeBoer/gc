@@ -50,11 +50,11 @@ services:
             retries: 3
             timeout: 5s
     vite:
-        image: node:alpine
+        image: oven/bun:latest
         working_dir: /lego
         volumes:
             - .:/lego
-        command: sh -c "npm install && npm run dev -- --host"
+        command: sh -c "bun install && bun run dev -- --host"
         ports:
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         networks:
