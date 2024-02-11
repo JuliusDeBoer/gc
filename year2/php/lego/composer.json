@@ -14,7 +14,8 @@
         "laravel/tinker": "^2.8",
         "league/flysystem-ftp": "^3.0",
         "spiral/roadrunner-cli": "^2.6",
-        "spiral/roadrunner-http": "^3.4"
+        "spiral/roadrunner-http": "^3.4",
+        "spiritix/lada-cache": "^5.3"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

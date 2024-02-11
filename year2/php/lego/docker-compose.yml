@@ -16,7 +16,7 @@ services:
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
-            SUPERVISOR_PHP_COMMAND: "/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=roadrunner --host=0.0.0.0 --rpc-port=6001 --port=80"
+            SUPERVISOR_PHP_COMMAND: '/usr/bin/php -d variables_order=EGPCS /var/www/html/artisan octane:start --server=roadrunner --host=0.0.0.0 --rpc-port=6001 --port=80'
         volumes:
             - '.:/var/www/html'
         networks:
@@ -24,6 +24,7 @@ services:
         depends_on:
             - pgsql
             - vite
+            - redis
     pgsql:
         image: 'postgres:15'
         ports:
@@ -50,11 +51,11 @@ services:
             retries: 3
             timeout: 5s
     vite:
-        image: oven/bun:latest
+        image: 'oven/bun:latest'
         working_dir: /lego
         volumes:
-            - .:/lego
-        command: sh -c "bun install && bun run dev -- --host"
+            - '.:/lego'
+        command: 'sh -c "bun install && bun run dev -- --host"'
         ports:
             - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         networks:
@@ -62,10 +63,25 @@ services:
     ftp:
         image: stilliard/pure-ftpd
         volumes:
-          - "sail-pgsql:/home/ftpusers/"
+            - 'sail-pgsql:/home/ftpusers/'
         environment:
-          FTP_USER_NAME: '${FTP_USERNAME}'
-          FTP_USER_PASS: '${FTP_PASSWORD}'
+            FTP_USER_NAME: '${FTP_USERNAME}'
+            FTP_USER_PASS: '${FTP_PASSWORD}'
+    redis:
+        image: 'redis:alpine'
+        ports:
+            - '${FORWARD_REDIS_PORT:-6379}:6379'
+        volumes:
+            - 'sail-redis:/data'
+        networks:
+            - sail
+        healthcheck:
+            test:
+                - CMD
+                - redis-cli
+                - ping
+            retries: 3
+            timeout: 5s
 networks:
     sail:
         driver: bridge
@@ -73,4 +89,6 @@ volumes:
     sail-pgsql:
         driver: local
     ftp:
+        driver: local
+    sail-redis:
         driver: local

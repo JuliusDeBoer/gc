@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c610165ffcea256094e46880e423e964",
+    "content-hash": "3362a783e7e5ba5936c1ea98352a219c",
     "packages": [
         {
             "name": "brick/math",
@@ -4282,6 +4282,75 @@
                 "source": "https://github.com/spiral/tokenizer"
             },
             "time": "2023-12-29T10:41:21+00:00"
+        },
+        {
+            "name": "spiritix/lada-cache",
+            "version": "v5.3.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/spiritix/lada-cache.git",
+                "reference": "181e2b2f7dc6e58da32ff4c25604b190f16e5e30"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/spiritix/lada-cache/zipball/181e2b2f7dc6e58da32ff4c25604b190f16e5e30",
+                "reference": "181e2b2f7dc6e58da32ff4c25604b190f16e5e30",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/database": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/redis": "^7.0|^8.0|^9.0|^10.0",
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0",
+                "php": ">=7.3"
+            },
+            "require-dev": {
+                "barryvdh/laravel-debugbar": "^3.2",
+                "mockery/mockery": "^1.3",
+                "orchestra/testbench": "^6.0|^7.0|^8.0",
+                "phpunit/phpunit": "^9.0|^10.0"
+            },
+            "suggest": {
+                "barryvdh/laravel-debugbar": "Provides debug information about the cache"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Spiritix\\LadaCache\\LadaCacheServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Spiritix\\LadaCache\\": "src/Spiritix/LadaCache/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Matthias Isler",
+                    "email": "mi@matthias-isler.ch"
+                }
+            ],
+            "description": "A Redis based, automated and scalable database caching layer for Laravel",
+            "keywords": [
+                "cache",
+                "caching",
+                "database",
+                "eloquent",
+                "laravel",
+                "model",
+                "php",
+                "redis"
+            ],
+            "support": {
+                "issues": "https://github.com/spiritix/lada-cache/issues",
+                "source": "https://github.com/spiritix/lada-cache/tree/v5.3.1"
+            },
+            "time": "2024-02-01T15:02:09+00:00"
         },
         {
             "name": "symfony/console",
