@@ -20,5 +20,4 @@ Route::get('/', function () {
 });
 
 Route::get('/blog', [BlogPostController::class, 'index']);
-
 Route::get('/contact-us', [ContactController::class, 'index']);
