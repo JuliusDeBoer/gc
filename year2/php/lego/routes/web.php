@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ActivityController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,4 @@ Route::get('/', function () {
 
 Route::get('/blog', [BlogPostController::class, 'index']);
 Route::get('/contact-us', [ContactController::class, 'index']);
+Route::get('/activity/new', [ActivityController::class, 'create']);

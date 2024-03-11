@@ -9,16 +9,13 @@
     <body>
       <header class="px-4 lg:px-6 h-14 flex items-center">
         <nav class="ml-auto flex gap-4 sm:gap-6">
-          <a class="text-sm font-medium hover:underline underline-offset-4 text-blue-500" href="#">
+          <a class="text-sm font-medium hover:underline underline-offset-4 text-blue-500" href="/ticket">
             Tickets
           </a>
-          <a class="text-sm font-medium hover:underline underline-offset-4 text-blue-500" href="#">
+          <a class="text-sm font-medium hover:underline underline-offset-4 text-blue-500" href="/attractions">
             Attractions
           </a>
-          <a class="text-sm font-medium hover:underline underline-offset-4 text-blue-500" href="#">
-            Events
-          </a>
-          <a class="text-sm font-medium hover:underline underline-offset-4 text-blue-500" href="#">
+          <a class="text-sm font-medium hover:underline underline-offset-4 text-blue-500" href="/contact">
             Contact
           </a>
         </nav>
