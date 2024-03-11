@@ -11,8 +11,10 @@ import {
 import stylesheet from "~/tailwind.css";
 
 export const links: LinksFunction = () => [
-	{ rel: "stylesheet", href: stylesheet },
+  { rel: "stylesheet", href: stylesheet },
   ...(cssBundleHref ? [{ rel: "stylesheet", href: cssBundleHref }] : []),
+  { rel: "preconnect", href: "https://raw.githubusercontent.com" },
+  { rel: "preconnect", href: "https://pokeapi.co" },
 ];
 
 export default function App() {
