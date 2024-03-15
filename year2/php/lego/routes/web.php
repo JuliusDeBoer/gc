@@ -1,7 +1,6 @@
 <?php
 
-use App\Http\Controllers\ActivityController;
-use App\Http\Controllers\BlogPostController;
+use App\Http\Controllers\AttractionController;
 use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 
@@ -14,12 +13,9 @@ use Illuminate\Support\Facades\Route;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/blog', [BlogPostController::class, 'index']);
+Route::get('/', function () { return view('welcome'); });
 Route::get('/contact-us', [ContactController::class, 'index']);
-Route::get('/activity/new', [ActivityController::class, 'create']);
+Route::get('/attractions/new', [AttractionController::class, 'new']);
+Route::get('/attractions/{id}', [AttractionController::class, 'show']);
