@@ -2,11 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8" />
-    <title>404</title>
-    <link
-        rel="icon"
-        href="https://media.tenor.com/j6HNDMU_fF4AAAAM/cow-dancing.gif"
-    />
+    <title>{{ $exception->getStatusCode() }}</title>
     <style>
         body {
             background: black;
@@ -22,7 +18,7 @@
 </head>
 <body>
     <img
-        src="https://http.cat/images/{{ $exception }}.jpg"
+        src="https://http.cat/images/{{ $exception->getStatusCode() }}.jpg"
     />
 </body>
 </html>
