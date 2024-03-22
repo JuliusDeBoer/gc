@@ -31,9 +31,10 @@ return [
     'disks' => [
         'ftp' => [
             'driver' => 'ftp',
-            'host' => env('FTP_HOST'),
+            'host' => "ftp",
             'username' => env('FTP_USERNAME'),
             'password' => env('FTP_PASSWORD'),
+            'ignorePassiveAddress' => true
         ],
     ],
 

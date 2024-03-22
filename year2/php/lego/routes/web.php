@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\AttractionController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\TicketController;
+use App\Http\Controllers\MiscController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,7 +17,14 @@ use Illuminate\Support\Facades\Route;
 |
  */
 
-Route::get('/', function () { return view('welcome'); });
+Route::get('/', [MiscController::class,'index']);
 Route::get('/contact-us', [ContactController::class, 'index']);
+Route::post('/contact-us', [ContactController::class, 'create']);
+Route::get('/attractions', [AttractionController::class, 'index']);
 Route::get('/attractions/new', [AttractionController::class, 'new']);
+Route::post('/attractions/new', [AttractionController::class, 'create']);
+Route::get('/attractions/images/{name}', [AttractionController::class, 'image']);
 Route::get('/attractions/{id}', [AttractionController::class, 'show']);
+Route::get('/tickets', [TicketController::class, 'index']);
+Route::post('/tickets', [TicketController::class, "create"]);
+Route::get('/opening-hours', [MiscController::class,'openingHours']);

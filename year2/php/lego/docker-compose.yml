@@ -24,7 +24,6 @@ services:
         depends_on:
             - pgsql
             - vite
-            - redis
     pgsql:
         image: "postgres:15"
         ports:
@@ -63,25 +62,17 @@ services:
     ftp:
         image: stilliard/pure-ftpd
         volumes:
-            - "sail-pgsql:/home/ftpusers/"
+            - "ftp:/home/ftpusers/"
         environment:
             FTP_USER_NAME: "${FTP_USERNAME}"
             FTP_USER_PASS: "${FTP_PASSWORD}"
-    redis:
-        image: "redis:alpine"
+            FTP_USER_HOME: "/home/ftpusers"
         ports:
-            - "${FORWARD_REDIS_PORT:-6379}:6379"
-        volumes:
-            - "sail-redis:/data"
+            - "21:21"
+            - "30000-30009:30000-30009"
         networks:
             - sail
-        healthcheck:
-            test:
-                - CMD
-                - redis-cli
-                - ping
-            retries: 3
-            timeout: 5s
+
 networks:
     sail:
         driver: bridge
@@ -89,6 +80,4 @@ volumes:
     sail-pgsql:
         driver: local
     ftp:
-        driver: local
-    sail-redis:
         driver: local
