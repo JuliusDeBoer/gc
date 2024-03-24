@@ -1,6 +1,7 @@
 import { cssBundleHref } from "@remix-run/css-bundle";
 import type { LinksFunction } from "@remix-run/node";
 import {
+  Link,
   Links,
   LiveReload,
   Meta,
@@ -9,6 +10,8 @@ import {
   ScrollRestoration,
 } from "@remix-run/react";
 import stylesheet from "~/tailwind.css";
+import pokeball from "~/assets/images/pokeball.jpg";
+import pokedex from "~/assets/images/pokedex.png";
 
 export const links: LinksFunction = () => [
   { rel: "stylesheet", href: stylesheet },
@@ -27,10 +30,20 @@ export default function App() {
         <Links />
       </head>
       <body>
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        <LiveReload />
+        <div
+          style={{ backgroundImage: `url(${pokeball})` }}
+          className="w-full min-h-screen py-16 flex flex-col items-center"
+        >
+          <Link to="/" className="m-8" reloadDocument>
+            <img src={pokedex} className="w-96" />
+          </Link>
+          <main className="mx-auto container bg-white shadow-xl rounded p-8">
+            <Outlet />
+            <ScrollRestoration />
+            <Scripts />
+            <LiveReload />
+          </main>
+        </div>
       </body>
     </html>
   );
