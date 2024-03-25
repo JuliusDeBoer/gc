@@ -40,7 +40,9 @@ export default function Index() {
       fetch(pokemon.species.url)
         .then((v) => v.json())
         .then((v) => {
-          setDescription(v.flavor_text_entries[0].flavor_text);
+          setDescription(
+            v.flavor_text_entries[0].flavor_text.replace("\u000c", " "),
+          );
           return v;
         })
         .then(async (species: PokemonSpecies) => {
@@ -54,7 +56,7 @@ export default function Index() {
   if (pokemon) {
     return (
       <div className="flex flex-wrap">
-        <div>
+        <div className="flex justify-center items-center w-full xl:w-auto">
           <img
             onClick={toggleShiny}
             src={
