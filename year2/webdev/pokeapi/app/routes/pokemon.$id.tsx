@@ -36,12 +36,14 @@ export default function Index() {
 
       setPokemon(pokemon);
 
-      // Two API calls to get the evolution chain
+      // Two API calls to get the evolution chain!
       fetch(pokemon.species.url)
         .then((v) => v.json())
         .then((v) => {
           setDescription(
-            v.flavor_text_entries[0].flavor_text.replace("\u000c", " "),
+            v.flavor_text_entries[0].flavor_text
+						// Replace form feed
+						.replace("\u000c", " "),
           );
           return v;
         })

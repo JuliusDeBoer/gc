@@ -21,7 +21,6 @@ function range(start: number, end: number) {
 
 export default function Index() {
   const [searchParams, setSearchParams] = useSearchParams();
-
   const [pokemon, setPokemon] = useState<{ results: Pokemon[] }>({
     results: [],
   });
@@ -60,11 +59,14 @@ export default function Index() {
 
       <ul className="flex flex-wrap justify-between">
         {pokemon.results.length != 0
+					// Display pokemon
           ? pokemon.results.map((pokemon, i) => (
               <li key={i + offset + 1}>
                 <PokemonCard pokemon={pokemon} id={i + offset + 1} />
               </li>
             ))
+
+						// Display skeleton
           : range(0, 40).map((i) => (
               <li className="w-44 h-44 m-8 animate-pulse" key={i + offset + 1}>
                 <div className="w-full h-full bg-slate-200 rounded shadow"></div>
