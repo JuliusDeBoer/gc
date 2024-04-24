@@ -1,0 +1,8 @@
+compile: setup
+	arduino-cli compile -b arduino:avr:uno
+
+setup:
+	arduino-cli core install arduino:avr
+
+upload: compile
+	arduino-cli upload -t -b arduino:avr:uno -p /dev/ttyACM0

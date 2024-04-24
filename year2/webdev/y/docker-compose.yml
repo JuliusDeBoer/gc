@@ -1,18 +1,24 @@
 services:
-  y.frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
+  y.frontend.dev:
+    image: node:alpine
+    command: sh -c "cd /app && npm install --force && npm run dev"
+    volumes:
+      - ./frontend:/app
     ports:
       - 3000:3000
     depends_on:
-      - y.backend
+      - y.backend.dev
     networks:
       - y
-  y.backend:
-    build:
-      context: ./backend
-      dockerfile: Dockerfile
+  y.backend.dev:
+    image: golang:latest
+    command: sh -c "cd /app && go run ./cmd"
+    develop:
+      watch:
+        - action: rebuild
+          path: ./backend
+    volumes:
+      - ./backend:/app
     depends_on:
       - y.db
     networks:

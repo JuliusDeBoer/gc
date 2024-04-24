@@ -1,15 +1,14 @@
 package main
 
 import (
-	"net/http"
+	"fmt"
+	"time"
 
 	"github.com/labstack/echo/v4"
-	
-	"gorm.io/gorm"
-	"gorm.io/driver/postgres"
-)
 
-var db *gorm.DB
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
 
 type Product struct {
   gorm.Model
@@ -17,23 +16,37 @@ type Product struct {
   Price uint
 }
 
-func setupDb() {
+func setupDb() *gorm.DB {
 	dsn := "host=y.db user=postgres password=password dbname=y port=5432 sslmode=disable"
-	tmpDb, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
-	db = tmpDb
 
-  if err != nil {
-    panic("failed to connect database")
-  }
+	i := 10
+	for i > 1 {
+		tmpDb, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
+		if err != nil {
+			i--
+
+			msg := fmt.Sprintf("ERROR: Could not connect to database. Retrying... %d (tries left)", i)
+			fmt.Println(msg)
+
+			time.Sleep(3 * time.Second)
+			continue
+		}
+
+		return tmpDb
+	}
+
+	panic("FATAL: Could not connect to database. Giving up")
 }
 
 func main() {
 	e := echo.New()
 
-	setupDb()
+	db := setupDb()
 
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, db.Config.Name())
-	})
+	prefix := "v1"
+
+	setupPosts(e, db, prefix + "/posts")
+
 	e.Logger.Fatal(e.Start(":1323"))
 }
